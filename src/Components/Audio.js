@@ -1,37 +1,18 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
+import janet from "../sound/janet.mp3";
 
-const url = "https://www.youtube.com/watch?v=D3AHaq_wWdU";
-
-const useAudio = url => {
-    const [audio] = useState(new Audio(url));
-    const [playing, setPlaying] = useState(false);
-  
-    const toggle = () => setPlaying(!playing);
-  
-    useEffect(() => {
-        playing ? audio.play() : audio.pause();
-      },
-      [playing]
-    );
-  
-    useEffect(() => {
-      audio.addEventListener('ended', () => setPlaying(false));
-      return () => {
-        audio.removeEventListener('ended', () => setPlaying(false));
-      };
-    }, []);
-  
-    return [playing, toggle];
-  };
-  
-  const Player = ({ url }) => {
-    const [playing, toggle] = useAudio(url);
-  
+const AudioPlayer = () => {
+    
     return (
-      <div>
-        <button onClick={toggle}>{playing ? "Pause" : "Play"}</button>
-      </div>
+
+
+<audio id="audio"
+    controls autoplay
+    src={janet}>
+        Your browser does not support the
+        <code>audio</code> element.
+</audio>
+
     );
-  };
-  
-  export default Audio;
+};
+    export default AudioPlayer;  
